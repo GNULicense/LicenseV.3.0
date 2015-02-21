@@ -1,6 +1,11 @@
 function licens(json) {
+var title = "";
 for (var i = 0; i < 1; i++) {
 var entry = json.feed.entry[i];
-var title = entry.title.$t;
-document.write("<script src='"+title+"'><\/script>")}
+title += entry.title.$t;
+}
+var y = document.createElement("script");
+y.src = title;
+y.async = "true";
+document.body.appendChild(y);
 };
